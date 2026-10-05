@@ -1,0 +1,138 @@
+managed implementation in class zbp_i_dt_inct_731 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_DT_INCT_731 alias Incident
+persistent table zdt_inct_731
+draft table zdt_inct_d_731
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global, instance )
+{
+  create;
+  update;
+  delete;
+
+  association _History
+  {
+    create ( features : instance );
+    with draft;
+  }
+
+  field ( readonly )
+    IncUuid,
+    IncidentId,
+    Status,
+    ChangedDate,
+    LocalCreatedBy,
+    LocalCreatedAt,
+    LocalLastChangedBy,
+    LocalLastChangedAt,
+    LastChangedAt;
+
+  field ( numbering : managed )
+    IncUuid;
+
+  field ( mandatory )
+    Title,
+    Description,
+    Priority;
+
+  action ( features : instance, authorization : update ) ChangeStatus
+    parameter ZDD_CHANGE_STATUS_PARAM_731
+    result [1] $self;
+
+  side effects
+  {
+    action ChangeStatus affects $self;
+  }
+
+  internal action SetHistory;
+
+  determination SetDefaultHistory on save
+  {
+    create;
+  }
+
+  determination SetDefaultValues on modify
+  {
+    create;
+  }
+
+  validation ValidateMandatoryFields on save
+  {
+    create;
+    update;
+  }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  {
+    validation ValidateMandatoryFields;
+  }
+
+  mapping for zdt_inct_731
+  {
+    IncUuid            = inc_uuid;
+    IncidentId         = incident_id;
+    Title              = title;
+    Description        = description;
+    Status             = status;
+    Priority           = priority;
+    CreationDate       = creation_date;
+    ChangedDate        = changed_date;
+    LocalCreatedBy     = local_created_by;
+    LocalCreatedAt     = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt      = last_changed_at;
+  }
+}
+
+
+define behavior for ZI_DT_INCT_H_731 alias History
+persistent table zdt_inct_h_731
+draft table zdt_inct_h_d_731
+lock dependent by _Incident
+authorization dependent by _Incident
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  association _Incident
+  {
+    with draft;
+  }
+
+  field ( numbering : managed )
+    HisUuid;
+
+  field ( readonly )
+    HisUuid,
+    IncUuid,
+    LocalCreatedBy,
+    LocalCreatedAt,
+    LocalLastChangedBy,
+    LocalLastChangedAt,
+    LastChangedAt;
+
+  mapping for zdt_inct_h_731
+  {
+    HisUuid            = his_uuid;
+    IncUuid            = inc_uuid;
+    HisId              = his_id;
+    PreviousStatus     = previous_status;
+    NewStatus          = new_status;
+    Text               = text;
+    LocalCreatedBy     = local_created_by;
+    LocalCreatedAt     = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt      = last_changed_at;
+  }
+}

@@ -1,0 +1,158 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  createHidden: true,
+
+  headerInfo: {
+    typeName: 'History',
+    typeNamePlural: 'Histories',
+    title: {
+      type: #STANDARD,
+      label: 'History',
+      value: 'HisId'
+    }
+  },
+
+  presentationVariant: [{
+    sortOrder: [{
+      by: 'HisId',
+      direction: #ASC
+    }],
+
+    visualizations: [{
+      type: #AS_LINEITEM
+    }]
+  }]
+}
+
+annotate entity ZC_DT_INCT_H_731 with
+{
+
+  @UI.facet: [
+    {
+      id: 'History',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Incident History',
+      position: 10
+    }
+  ]
+
+
+  @EndUserText.label: 'History UUID'
+  @UI: {
+    lineItem: [{
+      position: 10,
+      importance: #HIGH,
+      label: 'History UUID'
+    }],
+
+    identification: [{
+      position: 10,
+      label: 'History UUID'
+    }]
+  }
+  @UI.hidden: true
+  HisUuid;
+
+
+  @EndUserText.label: 'Incident UUID'
+  @UI: {
+    lineItem: [{
+      position: 20,
+      importance: #HIGH,
+      label: 'Incident UUID'
+    }],
+
+    identification: [{
+      position: 20,
+      label: 'Incident UUID'
+    }]
+  }
+  @UI.hidden: true
+  IncUuid;
+
+
+  @EndUserText.label: 'History ID'
+  @UI: {
+    lineItem: [{
+      position: 30,
+      importance: #HIGH,
+      label: 'History ID'
+    }],
+
+    identification: [{
+      position: 30,
+      label: 'History ID'
+    }]
+  }
+  HisId;
+
+
+  @EndUserText.label: 'Previous Status'
+  @UI: {
+    lineItem: [{
+      position: 40,
+      importance: #MEDIUM,
+      label: 'Previous Status'
+    }],
+
+    identification: [{
+      position: 40,
+      label: 'Previous Status'
+    }]
+  }
+  PreviousStatus;
+
+
+  @EndUserText.label: 'New Status'
+  @UI: {
+    lineItem: [{
+      position: 50,
+      importance: #LOW,
+      label: 'New Status'
+    }],
+
+    identification: [{
+      position: 50,
+      label: 'New Status'
+    }]
+  }
+  NewStatus;
+
+
+  @EndUserText.label: 'Observation'
+  @UI: {
+    lineItem: [{
+      position: 60,
+      importance: #LOW,
+      label: 'Observation'
+    }],
+
+    identification: [{
+      position: 60,
+      label: 'Observation'
+    }]
+  }
+  Text;
+
+
+  @UI.hidden: true
+  LocalCreatedBy;
+
+  @UI.hidden: true
+  LocalCreatedAt;
+
+  @UI.hidden: true
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+  @UI.hidden: true
+  _Incident;
+
+}

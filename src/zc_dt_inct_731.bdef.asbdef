@@ -1,0 +1,35 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZC_DT_INCT_731 alias Incident
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use action ChangeStatus;
+
+  use association _History
+  {
+    create;
+    with draft;
+  }
+}
+
+define behavior for ZC_DT_INCT_H_731 alias History
+use etag
+{
+  use association _Incident
+  {
+    with draft;
+  }
+}

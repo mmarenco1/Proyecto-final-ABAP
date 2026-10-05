@@ -1,0 +1,248 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+    typeName: 'Incident',
+    typeNamePlural: 'Incidents',
+    title: {
+      type: #STANDARD,
+      label: 'Incident',
+      value: 'IncidentId'
+    }
+  },
+
+  presentationVariant: [{
+    sortOrder: [{
+      by: 'IncidentId',
+      direction: #ASC
+    }],
+    visualizations: [{
+      type: #AS_LINEITEM
+    }]
+  }]
+}
+
+annotate view ZC_DT_INCT_731 with
+{
+
+  @EndUserText.label: 'Incident UUID'
+  @UI.facet: [
+    {
+      id: 'Incident',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Incident Details',
+      position: 10
+    },
+    {
+      id: 'History',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      label: 'Incident History',
+      position: 20,
+      targetElement: '_History'
+    }
+  ]
+
+  @UI.hidden: true
+
+  @UI: {
+    lineItem: [
+      {
+        position: 10,
+        importance: #HIGH,
+        label: 'Incident UUID'
+      },
+      {
+        type: #FOR_ACTION,
+        dataAction: 'ChangeStatus',
+        label: 'Change Status',
+        position: 10
+      }
+    ],
+
+    identification: [
+      {
+        position: 10,
+        label: 'Incident UUID'
+      },
+      {
+        type: #FOR_ACTION,
+        dataAction: 'ChangeStatus',
+        label: 'Change Status',
+        position: 10
+      }
+    ]
+  }
+  IncUuid;
+
+
+  @EndUserText.label: 'Incident ID'
+  @UI: {
+    lineItem: [{
+      position: 20,
+      importance: #MEDIUM,
+      label: 'Incident ID'
+    }],
+
+    identification: [{
+      position: 20,
+      label: 'Incident ID'
+    }],
+
+    selectionField: [{
+      position: 20
+    }]
+  }
+  IncidentId;
+
+
+  @EndUserText.label: 'Title'
+  @UI: {
+    lineItem: [{
+      position: 30,
+      importance: #LOW,
+      label: 'Title'
+    }],
+
+    identification: [{
+      position: 30,
+      label: 'Title'
+    }]
+  }
+  Title;
+
+
+  @EndUserText.label: 'Description'
+  @UI: {
+    lineItem: [{
+      position: 40,
+      importance: #LOW,
+      label: 'Description'
+    }],
+
+    identification: [{
+      position: 40,
+      label: 'Description'
+    }],
+
+    selectionField: [{
+      position: 40
+    }]
+  }
+  Description;
+
+
+  @EndUserText.label: 'Incident Status'
+  @Consumption.valueHelpDefinition: [
+    {
+      entity.name: 'ZDD_STATUS_VH_731',
+      entity.element: 'StatusCode',
+      useForValidation: true
+    }
+  ]
+  @UI: {
+    lineItem: [{
+      position: 50,
+      importance: #LOW,
+      label: 'Incident Status'
+    }],
+
+    identification: [{
+      position: 50,
+      label: 'Incident Status'
+    }],
+
+    selectionField: [{
+      position: 50
+    }]
+  }
+  Status;
+
+
+  @EndUserText.label: 'Incident Priority'
+  @Consumption.valueHelpDefinition: [
+    {
+      entity.name: 'ZDD_PRIORITY_VH_731',
+      entity.element: 'PriorityCode',
+      useForValidation: true
+    }
+  ]
+  @UI: {
+    lineItem: [{
+      position: 60,
+      importance: #LOW,
+      label: 'Incident Priority'
+    }],
+
+    identification: [{
+      position: 60,
+      label: 'Incident Priority'
+    }],
+
+    selectionField: [{
+      position: 60
+    }]
+  }
+  Priority;
+
+
+  @EndUserText.label: 'Created Date'
+  @UI: {
+    lineItem: [{
+      position: 70,
+      importance: #LOW,
+      label: 'Created Date'
+    }],
+
+    identification: [{
+      position: 70,
+      label: 'Created Date'
+    }],
+
+    selectionField: [{
+      position: 70
+    }]
+  }
+  CreationDate;
+
+
+  @EndUserText.label: 'Changed Date'
+  @UI: {
+    lineItem: [{
+      position: 80,
+      importance: #LOW,
+      label: 'Changed Date'
+    }],
+
+    identification: [{
+      position: 80,
+      label: 'Changed Date'
+    }],
+
+    selectionField: [{
+      position: 80
+    }]
+  }
+  ChangedDate;
+
+
+  @UI.hidden: true
+  LocalCreatedBy;
+
+  @UI.hidden: true
+  LocalCreatedAt;
+
+  @UI.hidden: true
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+  @UI.hidden: true
+  _History;
+
+}
